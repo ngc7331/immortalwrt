@@ -72,6 +72,22 @@ define Device/beaglev-starlight
 endef
 TARGET_DEVICES += beaglev-starlight
 
+define Device/milkv-mars-cm-emmc
+  DEVICE_VENDOR := Milk-V
+  DEVICE_MODEL := Mars CM
+  DEVICE_DTS := starfive/jh7110-milkv-marscm-emmc
+  DEVICE_PACKAGES := kmod-eeprom-at24 kmod-brcmfmac brcmfmac-firmware-43456-sdio brcmfmac-nvram-43456-sdio
+endef
+TARGET_DEVICES += milkv-mars-cm-emmc
+
+define Device/milkv-mars-cm-lite
+  DEVICE_VENDOR := Milk-V
+  DEVICE_MODEL := Mars CM Lite
+  DEVICE_DTS := starfive/jh7110-milkv-marscm-lite
+  DEVICE_PACKAGES := kmod-eeprom-at24 kmod-brcmfmac brcmfmac-firmware-43456-sdio brcmfmac-nvram-43456-sdio
+endef
+TARGET_DEVICES += milkv-mars-cm-lite
+
 define Device/visionfive-v1
   $(call Device/JH7100)
   DEVICE_VENDOR := StarFive
