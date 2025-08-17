@@ -1,0 +1,27 @@
+From: E Shattow <e@freeshell.de>
+Subject: [PATCH v2] riscv: dts: starfive: jh7110-common: drop no-sdio property from mmc1
+Date: Tue, 29 Jul 2025 07:11:35 -0700	[thread overview]
+Message-ID: <20250729141142.13907-1-e@freeshell.de> (raw)
+
+Relax no-sdio restriction on mmc1 for jh7110 boards. Property was
+introduced for StarFive VisionFive2 dts to configure mmc1 for SD Card
+but this is not necessary, the restriction is only needed to block use of
+commands that would cause a device to malfunction.
+
+Signed-off-by: E Shattow <e@freeshell.de>
+---
+ arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index 4baeb981d4df..b156f8703016 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -290,7 +290,6 @@ &mmc1 {
+ 	assigned-clock-rates = <50000000>;
+ 	bus-width = <4>;
+ 	bootph-pre-ram;
+-	no-sdio;
+ 	no-mmc;
+ 	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
+ 	disable-wp;
