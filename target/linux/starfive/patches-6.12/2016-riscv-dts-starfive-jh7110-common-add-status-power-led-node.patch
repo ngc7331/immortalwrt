@@ -1,0 +1,41 @@
+From 1ec99dfe9eb0cdc576249e8b75de25f860123629 Mon Sep 17 00:00:00 2001
+From: E Shattow <e@freeshell.de>
+Date: Tue, 15 Jul 2025 21:04:54 -0700
+Subject: [PATCH] riscv: dts: starfive: jh7110-common: add status power led
+ node
+
+Add status power led node for StarFive VisionFive2 and variant boards.
+
+Signed-off-by: E Shattow <e@freeshell.de>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index 4baeb981d4dfd1..2eaf01775ef57d 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -8,6 +8,7 @@
+ #include "jh7110.dtsi"
+ #include "jh7110-pinfunc.h"
+ #include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
+ #include <dt-bindings/pinctrl/starfive,jh7110-pinctrl.h>
+ 
+ / {
+@@ -38,6 +39,14 @@
+ 		priority = <224>;
+ 	};
+ 
++	leds {
++		compatible = "gpio-leds";
++
++		led_status_power: led-0 {
++			gpios = <&aongpio 3 GPIO_ACTIVE_HIGH>;
++		};
++	};
++
+ 	pwmdac_codec: audio-codec {
+ 		compatible = "linux,spdif-dit";
+ 		#sound-dai-cells = <0>;

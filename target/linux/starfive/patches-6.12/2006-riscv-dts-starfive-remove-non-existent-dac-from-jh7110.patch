@@ -1,0 +1,33 @@
+From 4bdea6e33946d481d54f6903b716101dd75b884e Mon Sep 17 00:00:00 2001
+From: Conor Dooley <conor.dooley@microchip.com>
+Date: Thu, 13 Feb 2025 20:03:52 +0000
+Subject: [PATCH] riscv: dts: starfive: remove non-existent dac from jh7110
+
+The jh7110 boards do not have a Rohm DAC on them as far as I
+can tell, and they certainly do not have a dh2228fv, as this device does
+not actually exist! Remove the dac nodes from the devicetrees as it is
+not acceptable to pretend to have a device on a board in order to bind
+the spidev driver in Linux.
+
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index dd2eefc295e5c8..c2f70f5e2918fc 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -350,12 +350,6 @@
+ &spi0 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&spi0_pins>;
+-
+-	spi_dev0: spi@0 {
+-		compatible = "rohm,dh2228fv";
+-		reg = <0>;
+-		spi-max-frequency = <10000000>;
+-	};
+ };
+ 
+ &syscrg {

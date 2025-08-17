@@ -1,0 +1,57 @@
+From 71385a893cea3e3bc752aa75e3e616073cda7889 Mon Sep 17 00:00:00 2001
+From: Icenowy Zheng <uwu@icenowy.me>
+Date: Thu, 24 Apr 2025 14:06:05 +0800
+Subject: [PATCH] riscv: dts: starfive: jh7110-common: use macros for MMC0 pins
+
+The pin names of MMC0 pinmux is defined in the pinctrl dt binding header
+associated with starfive,jh7110-pinctrl .
+
+Include the header file and use these names instead of raw numbers for
+defining MMC0 pinmux.
+
+Signed-off-by: Icenowy Zheng <uwu@icenowy.me>
+Reviewed-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ .../boot/dts/starfive/jh7110-common.dtsi      | 21 ++++++++++---------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index c2f70f5e2918fc..a2c72b385a9051 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -8,6 +8,7 @@
+ #include "jh7110.dtsi"
+ #include "jh7110-pinfunc.h"
+ #include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/pinctrl/starfive,jh7110-pinctrl.h>
+ 
+ / {
+ 	aliases {
+@@ -428,16 +429,16 @@
+ 		};
+ 
+ 		mmc-pins {
+-			pinmux = <PINMUX(64, 0)>,
+-				 <PINMUX(65, 0)>,
+-				 <PINMUX(66, 0)>,
+-				 <PINMUX(67, 0)>,
+-				 <PINMUX(68, 0)>,
+-				 <PINMUX(69, 0)>,
+-				 <PINMUX(70, 0)>,
+-				 <PINMUX(71, 0)>,
+-				 <PINMUX(72, 0)>,
+-				 <PINMUX(73, 0)>;
++			pinmux = <PINMUX(PAD_SD0_CLK, 0)>,
++				 <PINMUX(PAD_SD0_CMD, 0)>,
++				 <PINMUX(PAD_SD0_DATA0, 0)>,
++				 <PINMUX(PAD_SD0_DATA1, 0)>,
++				 <PINMUX(PAD_SD0_DATA2, 0)>,
++				 <PINMUX(PAD_SD0_DATA3, 0)>,
++				 <PINMUX(PAD_SD0_DATA4, 0)>,
++				 <PINMUX(PAD_SD0_DATA5, 0)>,
++				 <PINMUX(PAD_SD0_DATA6, 0)>,
++				 <PINMUX(PAD_SD0_DATA7, 0)>;
+ 			bias-pull-up;
+ 			drive-strength = <12>;
+ 			input-enable;

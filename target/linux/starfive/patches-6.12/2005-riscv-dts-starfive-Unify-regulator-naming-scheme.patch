@@ -1,0 +1,29 @@
+From 3d20e619c9c0601e147925e86086108c8e03c6ea Mon Sep 17 00:00:00 2001
+From: Shengyu Qu <wiagn233@outlook.com>
+Date: Thu, 6 Feb 2025 01:16:35 +0800
+Subject: [PATCH] riscv: dts: starfive: Unify regulator naming scheme
+
+Currently, there are 3 regulators defined in JH7110's common device tree,
+but regulator names are mixed with "-" and "_". So unify them to "_",
+which is more often to be seen in other dts files.
+
+Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
+Acked-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index 48fb5091b81766..dd2eefc295e5c8 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -233,7 +233,7 @@
+ 				regulator-always-on;
+ 				regulator-min-microvolt = <500000>;
+ 				regulator-max-microvolt = <1540000>;
+-				regulator-name = "vdd-cpu";
++				regulator-name = "vdd_cpu";
+ 			};
+ 
+ 			emmc_vdd: aldo4 {

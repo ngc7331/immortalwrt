@@ -1,0 +1,33 @@
+From 635918111453aa5c6c74d9dec9fe1f2037e531ed Mon Sep 17 00:00:00 2001
+From: E Shattow <e@freeshell.de>
+Date: Fri, 2 May 2025 03:30:43 -0700
+Subject: [PATCH] riscv: dts: starfive: jh7110-common: add eeprom node to i2c5
+
+StarFive VisionFive2 and similar JH7110 boards have an eeprom compatible
+with Atmel 24c04. Add the node so this may be used with the at24 driver.
+
+Signed-off-by: E Shattow <e@freeshell.de>
+Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+Reviewed-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index 0d693222096823..e7286c918c9b3f 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -246,6 +246,12 @@
+ 			};
+ 		};
+ 	};
++
++	eeprom@50 {
++		compatible = "atmel,24c04";
++		reg = <0x50>;
++		pagesize = <16>;
++	};
+ };
+ 
+ &i2c6 {

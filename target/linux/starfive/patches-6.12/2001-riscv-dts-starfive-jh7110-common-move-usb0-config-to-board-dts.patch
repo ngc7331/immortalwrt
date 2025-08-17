@@ -1,0 +1,82 @@
+From: Guodong Xu <guodong@riscstar.com>
+Subject: [PATCH v7 2/5] riscv: dts: starfive: jh7110-common: move usb0 config to board dts
+Date: Mon, 28 Oct 2024 16:25:50 +0800	[thread overview]
+Message-ID: <20241028082553.1989797-3-guodong@riscstar.com> (raw)
+In-Reply-To: <20241028082553.1989797-1-guodong@riscstar.com>
+
+The JH7110 USB0 can operate as a dual-role USB device.  Different
+boards can have different configuration.
+
+For all current boards this device operates in peripheral mode, but
+on a new board this operates in host mode.  This property will no
+longer be common, so define the "dr_mode" property in the board files
+rather than in the common DTSI file.
+
+Signed-off-by: Alex Elder <elder@riscstar.com>
+Signed-off-by: Guodong Xu <guodong@riscstar.com>
+Reviewed-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+---
+v7: Add Emil's Reviewed-by
+v6: New patch
+
+ arch/riscv/boot/dts/starfive/jh7110-common.dtsi              | 5 -----
+ arch/riscv/boot/dts/starfive/jh7110-milkv-mars.dts           | 5 +++++
+ arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts        | 5 +++++
+ .../boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi      | 5 +++++
+ 4 files changed, 15 insertions(+), 5 deletions(-)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index 9e77f79ec162..87ea81e9fed4 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -637,11 +637,6 @@ &uart0 {
+ 	status = "okay";
+ };
+ 
+-&usb0 {
+-	dr_mode = "peripheral";
+-	status = "okay";
+-};
+-
+ &U74_1 {
+ 	cpu-supply = <&vdd_cpu>;
+ };
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-milkv-mars.dts b/arch/riscv/boot/dts/starfive/jh7110-milkv-mars.dts
+index 66ad3eb2fd66..0d248b671d4b 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-milkv-mars.dts
++++ b/arch/riscv/boot/dts/starfive/jh7110-milkv-mars.dts
+@@ -52,3 +52,8 @@ &pwmdac {
+ &spi0 {
+ 	status = "okay";
+ };
++
++&usb0 {
++	dr_mode = "peripheral";
++	status = "okay";
++};
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts b/arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts
+index dbc8612b8464..d5180c67ac55 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts
++++ b/arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts
+@@ -80,3 +80,8 @@ &pwmdac {
+ &spi0 {
+ 	status = "okay";
+ };
++
++&usb0 {
++	dr_mode = "peripheral";
++	status = "okay";
++};
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi b/arch/riscv/boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi
+index ef93a394bb2f..5f14afb2c24d 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi
+@@ -60,3 +60,8 @@ &pwmdac {
+ &spi0 {
+ 	status = "okay";
+ };
++
++&usb0 {
++	dr_mode = "peripheral";
++	status = "okay";
++};

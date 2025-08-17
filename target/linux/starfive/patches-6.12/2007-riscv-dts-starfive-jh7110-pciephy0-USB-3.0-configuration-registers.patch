@@ -1,0 +1,29 @@
+From 65e8b991267093b759a03c20508d2643a41aa046 Mon Sep 17 00:00:00 2001
+From: E Shattow <e@freeshell.de>
+Date: Thu, 2 Jan 2025 10:37:36 -0800
+Subject: [PATCH] riscv: dts: starfive: jh7110: pciephy0 USB 3.0 configuration
+ registers
+
+StarFive JH7110 contains a Cadence USB2.0+USB3.0 controller IP block that
+may exclusively use pciephy0 for USB3.0 connectivity. Add the register
+offsets for the driver to enable/disable USB3.0 on pciephy0.
+
+Signed-off-by: E Shattow <e@freeshell.de>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ arch/riscv/boot/dts/starfive/jh7110.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110.dtsi b/arch/riscv/boot/dts/starfive/jh7110.dtsi
+index 0d8339357bad32..75ff07303e8b43 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110.dtsi
+@@ -611,6 +611,8 @@
+ 		pciephy0: phy@10210000 {
+ 			compatible = "starfive,jh7110-pcie-phy";
+ 			reg = <0x0 0x10210000 0x0 0x10000>;
++			starfive,sys-syscon = <&sys_syscon 0x18>;
++			starfive,stg-syscon = <&stg_syscon 0x148 0x1f4>;
+ 			#phy-cells = <0>;
+ 		};
+ 

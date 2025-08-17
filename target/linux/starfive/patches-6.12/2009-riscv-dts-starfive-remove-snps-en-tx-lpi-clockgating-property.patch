@@ -1,0 +1,44 @@
+From 637af286f9fcacd351f02dd9eb581b3c939639e9 Mon Sep 17 00:00:00 2001
+From: "Russell King (Oracle)" <rmk+kernel@armlinux.org.uk>
+Date: Wed, 12 Mar 2025 09:34:41 +0000
+Subject: [PATCH] riscv: dts: starfive: remove "snps,en-tx-lpi-clockgating"
+ property
+
+Whether the MII transmit clock can be stopped is primarily a property
+of the PHY (there is a capability bit that should be checked first.)
+Whether the MAC is capable of stopping the transmit clock is a separate
+issue, but this is already handled by the core DesignWare MAC code.
+
+As commit "net: stmmac: starfive: use PHY capability for TX clock stop"
+adds the flag to use the PHY capability, remove the DT property that is
+now unecessary.
+
+Cc: Samin Guo <samin.guo@starfivetech.com>
+Acked-by: Conor Dooley <conor.dooley@microchip.com>
+Signed-off-by: Russell King (Oracle) <rmk+kernel@armlinux.org.uk>
+Link: https://patch.msgid.link/E1tsIU5-005vGR-4c@rmk-PC.armlinux.org.uk
+Signed-off-by: Paolo Abeni <pabeni@redhat.com>
+---
+ arch/riscv/boot/dts/starfive/jh7110.dtsi | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110.dtsi b/arch/riscv/boot/dts/starfive/jh7110.dtsi
+index 0d8339357bad32..a7aed4a21b6558 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110.dtsi
+@@ -1022,7 +1022,6 @@
+ 			snps,force_thresh_dma_mode;
+ 			snps,axi-config = <&stmmac_axi_setup>;
+ 			snps,tso;
+-			snps,en-tx-lpi-clockgating;
+ 			snps,txpbl = <16>;
+ 			snps,rxpbl = <16>;
+ 			starfive,syscon = <&aon_syscon 0xc 0x12>;
+@@ -1053,7 +1052,6 @@
+ 			snps,force_thresh_dma_mode;
+ 			snps,axi-config = <&stmmac_axi_setup>;
+ 			snps,tso;
+-			snps,en-tx-lpi-clockgating;
+ 			snps,txpbl = <16>;
+ 			snps,rxpbl = <16>;
+ 			starfive,syscon = <&sys_syscon 0x90 0x2>;

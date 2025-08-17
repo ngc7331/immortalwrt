@@ -1,0 +1,42 @@
+From 59404dceb303712faa9507b27c6fb14d8629c528 Mon Sep 17 00:00:00 2001
+From: E Shattow <e@freeshell.de>
+Date: Fri, 2 May 2025 03:30:42 -0700
+Subject: [PATCH] riscv: dts: starfive: jh7110-common: qspi flash setting
+ read-delay 2 cycles max 100MHz
+
+Use qspi flash read-delay and spi-max-frequency settings compatible with
+U-Boot bootloader.
+
+Observations from testing on Pine64 Star64 hardware within U-Boot bootloader
+and read-delay=2 are spi-max-frequency less than 49.8MHz fails to write,
+corrupt data writes at 25MHz to 49.799999MHz, and valid data writes at
+49.8MHz to 100MHz (not tested above 100MHz). No valid spi-max-frequency
+was found for 1<read-delay<=3 and corrupt data with read-delay=3.
+
+Looking around the Linux codebase it is common to see read-delay 2 cycles
+with spi-max-frequency 100MHz and testing confirms this to work in both
+U-Boot and Linux.
+
+Signed-off-by: E Shattow <e@freeshell.de>
+Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+Acked-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ arch/riscv/boot/dts/starfive/jh7110-common.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+index cf1ee98454d6f1..0d693222096823 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
++++ b/arch/riscv/boot/dts/starfive/jh7110-common.dtsi
+@@ -318,8 +318,8 @@
+ 	nor_flash: flash@0 {
+ 		compatible = "jedec,spi-nor";
+ 		reg = <0>;
+-		cdns,read-delay = <5>;
+-		spi-max-frequency = <12000000>;
++		cdns,read-delay = <2>;
++		spi-max-frequency = <100000000>;
+ 		cdns,tshsl-ns = <1>;
+ 		cdns,tsd2d-ns = <1>;
+ 		cdns,tchsh-ns = <1>;

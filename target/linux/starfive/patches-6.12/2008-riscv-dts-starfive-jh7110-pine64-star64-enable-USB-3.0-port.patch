@@ -1,0 +1,31 @@
+From 38818f7c9c179351334b1faffc4d40bd28cc9c72 Mon Sep 17 00:00:00 2001
+From: E Shattow <e@freeshell.de>
+Date: Thu, 2 Jan 2025 10:37:37 -0800
+Subject: [PATCH] riscv: dts: starfive: jh7110-pine64-star64: enable USB 3.0
+ port
+
+One of four USB-A ports on the Pine64 Star64 is USB 3.0 which requires to
+disable PCIE0 and change the mode of PCIE0 PHY to USB3.0 operation. The
+remaining three USB-A ports are USB 2.0 with the USB0 PHY and do not
+conflict with any of PCIE0 or PCIE1. PCIE1 (1-lane) routes to a PCIe X4
+connector.
+
+Signed-off-by: E Shattow <e@freeshell.de>
+Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+---
+ arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts b/arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts
+index b764d4d92fd902..31e825be2065af 100644
+--- a/arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts
++++ b/arch/riscv/boot/dts/starfive/jh7110-pine64-star64.dts
+@@ -100,3 +100,8 @@
+ 	pinctrl-0 = <&usb0_pins>;
+ 	status = "okay";
+ };
++
++&usb_cdns3 {
++	phys = <&usbphy0>, <&pciephy0>;
++	phy-names = "cdns3,usb2-phy", "cdns3,usb3-phy";
++};
