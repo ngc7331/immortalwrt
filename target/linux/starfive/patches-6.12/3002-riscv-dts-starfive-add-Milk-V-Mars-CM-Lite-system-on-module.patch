@@ -112,9 +112,9 @@ index 000000000000..e110146f0b76
 +	ap6256: wifi@1 {
 +		compatible = "brcm,bcm43456-fmac", "brcm,bcm4329-fmac";
 +		reg = <1>;
-+		interrupt-parent = <&sysgpio>;
-+		interrupts = <34 IRQ_TYPE_LEVEL_HIGH>;
-+		interrupt-names = "host-wake";
++		//interrupt-parent = <&sysgpio>;
++		//interrupts = <34 IRQ_TYPE_LEVEL_HIGH>;
++		//interrupt-names = "host-wake";
 +		pinctrl-0 = <&wifi_host_wake_irq>;
 +		pinctrl-names = "default";
 +	};
